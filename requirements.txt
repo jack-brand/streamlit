@@ -5,3 +5,4 @@ rapidfuzz
 pylatexenc
 plotly
 altair
+base64

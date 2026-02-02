@@ -5,6 +5,7 @@ import bibtexparser
 from rapidfuzz import fuzz
 from pylatexenc.latex2text import LatexNodes2Text
 latex_to_text = LatexNodes2Text().latex_to_text
+import base64
 
 st.set_page_config(
 	page_title="HEP Research Profile",
@@ -14,7 +15,7 @@ st.set_page_config(
 st.sidebar.title("Navigation")
 menu = st.sidebar.radio(
 	"Go to:",
-	["Researcher Profile", "Publications", "Data Explorer"],
+	["Researcher Profile", "Literature"],
 )
 
 # Dummy data
@@ -129,15 +130,33 @@ if menu == "Researcher Profile":
 		""",
 		unsafe_allow_html=True
 	)
+	st.markdown(
+		"""
+		I am a Physics graduate student specializing in high energy physics phenomenology (hep-ph). My research concerns an exotic state of matter called the quark-gluon plasma. But what, pray tell, is the quark-gluon plasma?
+
+		As you may know, the majority of matter that you see or interact with is made of atoms. Leucippus, in the 5th century BCE, and other ancient philosophers, posited that matter was comprised of fundamental indivisble components called atoms. On the contrary, we can indeed divide atoms, as we have defined them, into distinguishable parts. An atom comprises an outer cloud of electrons and a central nucleus of protons and neutrons.
+		
+		Protons and neutrons are examples of what we call hadrons. They are bound together in the nucleus by what we term the weak nuclear force. As it turns out, hadrons are comprised of yet smaller particles, called quarks and gluons, bound together by what we term the strong nuclear force. Within the Standard Model of physics, quarks, gluons and electrons, along with a few others, are fundamental, indivisible particles -- there is a Nobel prize waiting for you if you disprove this!
+		"""
+	)
 	st.write(
     	"""
-    	<div style="text-align: center;">
+		<br>
+    	<div style="
+			width: 600px;
+			height: 625px;
+			overflow: hidden;
+			margin: 0 auto;
+			position: relative;
+		">
         	<img
             	src="https://irfu.cea.fr/Images/astImg/610_1.jpg"
             	style="
-                	max-width: 600px;
-                	width: 100%;
-                	height: auto;
+					position: relative;
+                	top: -10px;
+                	left: -15px;
+					width: auto;
+					height: auto
             	"
         	>
     	</div>
@@ -146,20 +165,33 @@ if menu == "Researcher Profile":
 	)
 	st.write(
 		"""
-		<div style="text-align: center;">
-			<b>Fig. 1:</b> Phase diagram of matter interacting via the strong nuclear force.<br>
-			Credit: 
-			<a href="https://animalia-life.club/qa/pictures/quark-gluon-plasma-phase-diagram">
-				https://animalia-life.club/qa/pictures/quark-gluon-plasma-phase-diagram
-			</a>
+		<div style="margin-left: 75px; margin-right: 75px;">
+			<div style="font-size: 0.8em; text-align: center; margin-bottom: 1em;">
+				Credit: 
+				<a href="https://animalia-life.club/qa/pictures/quark-gluon-plasma-phase-diagram">
+					https://animalia-life.club/qa/pictures/quark-gluon-plasma-phase-diagram
+				</a>
+			</div>
+			<b>Fig. 1:</b>
+			Phase diagram of matter interacting via the strong nuclear force.
+			Quarks and gluons are fundamental particles that are bound together in states called hadrons.
+			If a hadron has three quarks in it, we call it a baryon; if it has two quarks in it, we call it a meson.
 		</div>
+		<br>
 		""",
 		unsafe_allow_html=True
 	)
+	st.markdown(
+		"""
+		As the name might suggest, the strong nuclear force is incredibly strong. It works only on very small scales, but takes an immense amount of energy to overcome. This is why we must collide nuclei at great speeds in particle colliders -- such as the Large Hadron Collier (LHC) or Relativistic Heavy Ion Collider (RHIC) -- in order to study the strong nuclear force. It is theorised, and well supported by evidence, that for a very brief time (one billionth of a second) after such a collision, the quarks and gluons that make up protons and neutrons become unbound, forming an extremely hot fluid-like state called the quark-gluon plasma (QGP), or as I call it, particle soup.
 
-elif menu == "Publications":
+		A lot of work has been done in order to find under which conditions the change from bound hadronic matter to unbound quark-gluon plasma occurs. The physics community is mostly agreed that we've observed a QGP when we've collided very big nuclei, like lead nuclei, but haven't observed a QGP when colliding the smallest nuclei, namely hydrogen  nuclei (which are just single protons). Recently, in 2025, we collided oxygen nuclei at the LHC, and evidence is emerging from ongoing data analysis that a QGP formed! Using theoretical modelling and computation, my researach group continues to push the question: Can we go smaller?
+		"""
+	)
 
-	st.title("Publications")
+elif menu == "Literature":
+
+	st.title("Literature")
 	st.write("The following is a collection of high energy physics (HEP) literature that I referenced in my BSc (Hons) research project. Feel free to explore!")
 
 	with open("publications.bib") as f:
@@ -215,7 +247,7 @@ elif menu == "Publications":
 		if pd.notna(doi) and doi else ""
 	)
 
-	keyword = st.text_input("Search:", "")
+	keyword = st.text_input("", icon="🔍", placeholder="Search")
 
 	if keyword:
 		filtered = publications[publications.apply(
