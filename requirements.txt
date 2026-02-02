@@ -1,0 +1,7 @@
+streamlit
+pandas
+bibtexparser
+rapidfuzz
+pylatexenc
+plotly
+altair
