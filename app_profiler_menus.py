@@ -5,7 +5,6 @@ import bibtexparser
 from rapidfuzz import fuzz
 from pylatexenc.latex2text import LatexNodes2Text
 latex_to_text = LatexNodes2Text().latex_to_text
-import base64
 
 st.set_page_config(
 	page_title="HEP Research Profile",
